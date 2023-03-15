@@ -36,7 +36,7 @@ resource "aws_lambda_function" "function" {
 resource "aws_api_gateway_resource" "base" {
   rest_api_id = var.api_id
   parent_id   = var.root_resource_id
-  path_part   = var.path
+  path_part   = var.api_path
 }
 
 resource "aws_api_gateway_resource" "base_proxy" {
