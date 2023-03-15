@@ -51,13 +51,17 @@ No modules.
 | <a name="input_api_path"></a> [api\_path](#input\_api\_path) | n/a | `string` | n/a | yes |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | n/a | yes |
 | <a name="input_dist_zip"></a> [dist\_zip](#input\_dist\_zip) | n/a | `string` | n/a | yes |
-| <a name="input_handler"></a> [handler](#input\_handler) | n/a | `string` | `"lambda.handler"` | no |
+| <a name="input_handler"></a> [handler](#input\_handler) | n/a | `string` | n/a | yes |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | n/a | `string` | n/a | yes |
-| <a name="input_role"></a> [role](#input\_role) | n/a | `string` | n/a | yes |
+| <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | n/a | `string` | n/a | yes |
 | <a name="input_root_resource_id"></a> [root\_resource\_id](#input\_root\_resource\_id) | n/a | `string` | n/a | yes |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | n/a | `string` | n/a | yes |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_api_base_url"></a> [api\_base\_url](#output\_api\_base\_url) | n/a |
+| <a name="output_api_path"></a> [api\_path](#output\_api\_path) | n/a |
+| <a name="output_api_url"></a> [api\_url](#output\_api\_url) | n/a |
 <!-- END_TF_DOCS -->
