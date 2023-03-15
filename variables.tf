@@ -2,7 +2,7 @@ variable "repository_name" {
   type = string
 }
 
-variable "source_directory" {
+variable "dist_dir" {
   type = string
 }
 
@@ -28,5 +28,9 @@ variable "api_id" {
 }
 
 variable "root_resource_id" {
+  type = string
+}
+
+variable "api_path" {
   type = string
 }

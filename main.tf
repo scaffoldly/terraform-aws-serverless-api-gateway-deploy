@@ -1,21 +1,19 @@
 locals {
-  basename      = basename(var.source_directory)
-  path          = local.basename
-  function_name = "${var.repository_name}-${local.basename}"
-  archive_name  = "${local.function_name}.zip"
+  function_name = "${var.repository_name}-${var.api_path}"
+  archive_name  = "${var.repository_name}-${var.api_path}.zip"
 }
 
 data "archive_file" "archive" {
   type = "zip"
 
-  source_dir  = var.source_directory
+  source_dir  = var.dist_dir
   output_path = "${path.module}/${local.archive_name}"
 }
 
 resource "aws_s3_object" "archive" {
   bucket = var.bucket_name
 
-  key    = "deploy/${local.archive_name}"
+  key    = "dist/${local.archive_name}"
   source = data.archive_file.archive.output_path
 
   etag = filemd5(data.archive_file.archive.output_path)
@@ -38,7 +36,7 @@ resource "aws_lambda_function" "function" {
 resource "aws_api_gateway_resource" "base" {
   rest_api_id = var.api_id
   parent_id   = var.root_resource_id
-  path_part   = local.path
+  path_part   = var.path
 }
 
 resource "aws_api_gateway_resource" "base_proxy" {
@@ -83,7 +81,7 @@ resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = var.api_id
 
   triggers = {
-    redeployment = data.archive_file.archive.output_base64sha256
+    redeployment = aws_lambda_function.function.source_code_hash
   }
 
   lifecycle {
