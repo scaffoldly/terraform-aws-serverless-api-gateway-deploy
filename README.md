@@ -50,13 +50,14 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_api_id"></a> [api\_id](#input\_api\_id) | n/a | `string` | n/a | yes |
+| <a name="input_api_path"></a> [api\_path](#input\_api\_path) | n/a | `string` | n/a | yes |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | n/a | yes |
+| <a name="input_dist_dir"></a> [dist\_dir](#input\_dist\_dir) | n/a | `string` | n/a | yes |
 | <a name="input_handler"></a> [handler](#input\_handler) | n/a | `string` | `"lambda.handler"` | no |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | n/a | `string` | n/a | yes |
 | <a name="input_role"></a> [role](#input\_role) | n/a | `string` | n/a | yes |
 | <a name="input_root_resource_id"></a> [root\_resource\_id](#input\_root\_resource\_id) | n/a | `string` | n/a | yes |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | n/a | `string` | n/a | yes |
-| <a name="input_source_directory"></a> [source\_directory](#input\_source\_directory) | n/a | `string` | n/a | yes |
 
 ## Outputs
 
