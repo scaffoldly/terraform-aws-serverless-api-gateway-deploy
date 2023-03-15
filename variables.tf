@@ -2,7 +2,7 @@ variable "repository_name" {
   type = string
 }
 
-variable "dist_dir" {
+variable "dist_zip" {
   type = string
 }
 
