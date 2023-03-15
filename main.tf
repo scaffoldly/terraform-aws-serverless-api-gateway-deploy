@@ -1,8 +1,6 @@
 locals {
-  function_name = "${var.repository_name}-${var.api_path}"
+  function_name = "${var.repository_name}-${var.api_path}" # TODO Support Slashes
   archive_name  = "${var.repository_name}-${var.api_path}.zip"
-  api_parts     = split("/", var.api_path)
-  last_part     = length(local.api_parts) - 1
 }
 
 resource "aws_s3_object" "archive" {
@@ -29,21 +27,20 @@ resource "aws_lambda_function" "function" {
 }
 
 resource "aws_api_gateway_resource" "base" {
-  count       = length(local.api_parts)
   rest_api_id = var.api_id
-  parent_id   = count.index == 0 ? var.root_resource_id : aws_api_gateway_resource.base[count.index - 1].id
-  path_part   = local.api_parts[count.index]
+  parent_id   = var.root_resource_id
+  path_part   = var.api_path
 }
 
 resource "aws_api_gateway_resource" "base_proxy" {
   rest_api_id = var.api_id
-  parent_id   = aws_api_gateway_resource.base[local.last_part].id
+  parent_id   = aws_api_gateway_resource.base.id
   path_part   = "{proxy+}"
 }
 
 resource "aws_api_gateway_method" "base" {
   rest_api_id   = var.api_id
-  resource_id   = aws_api_gateway_resource.base[local.last_part].id
+  resource_id   = aws_api_gateway_resource.base.id
   http_method   = "ANY"
   authorization = "NONE"
 }
@@ -57,7 +54,7 @@ resource "aws_api_gateway_method" "base_proxy" {
 
 resource "aws_api_gateway_integration" "base" {
   rest_api_id             = var.api_id
-  resource_id             = aws_api_gateway_resource.base[local.last_part].id
+  resource_id             = aws_api_gateway_resource.base.id
   http_method             = aws_api_gateway_method.base.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
@@ -85,7 +82,7 @@ resource "aws_api_gateway_deployment" "deployment" {
   }
 
   depends_on = [
-    aws_api_gateway_integration.base,
+    aws_api_gateway_resource.base,
     aws_api_gateway_integration.base_proxy
   ]
 }
