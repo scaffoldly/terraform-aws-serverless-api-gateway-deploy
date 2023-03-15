@@ -15,11 +15,10 @@ variable "runtime" {
 }
 
 variable "handler" {
-  type    = string
-  default = "lambda.handler"
+  type = string
 }
 
-variable "role" {
+variable "role_arn" {
   type = string
 }
 
