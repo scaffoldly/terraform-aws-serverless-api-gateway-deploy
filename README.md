@@ -23,6 +23,7 @@ TODO
 
 | Name | Version |
 |------|---------|
+| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.3.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.58.0 |
 
 ## Modules
@@ -42,6 +43,7 @@ No modules.
 | [aws_api_gateway_resource.base_proxy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_resource) | resource |
 | [aws_lambda_function.function](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
 | [aws_s3_object.archive](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
+| [archive_file.archive](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
@@ -50,7 +52,7 @@ No modules.
 | <a name="input_api_id"></a> [api\_id](#input\_api\_id) | n/a | `string` | n/a | yes |
 | <a name="input_api_path"></a> [api\_path](#input\_api\_path) | n/a | `string` | n/a | yes |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | n/a | yes |
-| <a name="input_dist_zip"></a> [dist\_zip](#input\_dist\_zip) | n/a | `string` | n/a | yes |
+| <a name="input_dist_dir"></a> [dist\_dir](#input\_dist\_dir) | n/a | `string` | n/a | yes |
 | <a name="input_handler"></a> [handler](#input\_handler) | n/a | `string` | n/a | yes |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | n/a | `string` | n/a | yes |
 | <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | n/a | `string` | n/a | yes |
