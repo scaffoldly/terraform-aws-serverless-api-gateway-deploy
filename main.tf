@@ -3,13 +3,20 @@ locals {
   archive_name  = "${var.repository_name}-${var.api_path}.zip"
 }
 
+data "archive_file" "archive" {
+  type = "zip"
+
+  source_dir  = var.dist_dir
+  output_path = "${path.module}/${local.archive_name}"
+}
+
 resource "aws_s3_object" "archive" {
   bucket = var.bucket_name
 
   key    = "dist/${local.archive_name}"
-  source = var.dist_zip
+  source = data.archive_file.archive.output_path
 
-  etag = filemd5(var.dist_zip)
+  etag = data.archive_file.archive.output_md5
 }
 
 resource "aws_lambda_function" "function" {
@@ -21,7 +28,7 @@ resource "aws_lambda_function" "function" {
   runtime = var.runtime
   handler = var.handler
 
-  source_code_hash = filebase64sha256(var.dist_zip)
+  source_code_hash = data.archive_file.archive.output_base64sha256
 
   role = var.role_arn
 }
