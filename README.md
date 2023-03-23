@@ -53,7 +53,7 @@ No modules.
 | <a name="input_api_path"></a> [api\_path](#input\_api\_path) | n/a | `string` | n/a | yes |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | n/a | yes |
 | <a name="input_create_archive"></a> [create\_archive](#input\_create\_archive) | n/a | `bool` | `true` | no |
-| <a name="input_dist_dir"></a> [dist\_dir](#input\_dist\_dir) | n/a | `string` | n/a | yes |
+| <a name="input_dist_path"></a> [dist\_path](#input\_dist\_path) | n/a | `string` | n/a | yes |
 | <a name="input_handler"></a> [handler](#input\_handler) | n/a | `string` | n/a | yes |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | n/a | `string` | n/a | yes |
 | <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | n/a | `string` | n/a | yes |
