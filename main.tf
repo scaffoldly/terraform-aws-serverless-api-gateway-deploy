@@ -4,6 +4,8 @@ locals {
 }
 
 data "archive_file" "archive" {
+  count = var.create_archive ? 1 : 0
+
   type = "zip"
 
   source_dir  = var.dist_dir
@@ -11,24 +13,26 @@ data "archive_file" "archive" {
 }
 
 resource "aws_s3_object" "archive" {
+  count = var.create_archive ? 1 : 0
+
   bucket = var.bucket_name
 
   key    = "dist/${local.archive_name}"
-  source = data.archive_file.archive.output_path
+  source = data.archive_file.archive[0].output_path
 
-  etag = data.archive_file.archive.output_md5
+  etag = data.archive_file.archive[0].output_md5
 }
 
 resource "aws_lambda_function" "function" {
   function_name = local.function_name
 
-  s3_bucket = aws_s3_object.archive.bucket
-  s3_key    = aws_s3_object.archive.key
+  s3_bucket = var.bucket_name
+  s3_key    = var.create_archive ? aws_s3_object.archive[0].key : abspath(var.dist_dir)
 
   runtime = var.runtime
   handler = var.handler
 
-  source_code_hash = data.archive_file.archive.output_base64sha256
+  source_code_hash = var.create_archive ? data.archive_file.archive[0].output_base64sha256 : null
 
   role = var.role_arn
 }

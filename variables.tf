@@ -33,3 +33,8 @@ variable "root_resource_id" {
 variable "api_path" {
   type = string
 }
+
+variable "create_archive" {
+  type    = bool
+  default = true
+}
