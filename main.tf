@@ -8,7 +8,7 @@ data "archive_file" "archive" {
 
   type = "zip"
 
-  source_dir  = var.dist_dir
+  source_dir  = var.dist_path
   output_path = "${path.module}/${local.archive_name}"
 }
 
@@ -27,7 +27,7 @@ resource "aws_lambda_function" "function" {
   function_name = local.function_name
 
   s3_bucket = var.bucket_name
-  s3_key    = var.create_archive ? aws_s3_object.archive[0].key : abspath(var.dist_dir)
+  s3_key    = var.create_archive ? aws_s3_object.archive[0].key : var.dist_path
 
   runtime = var.runtime
   handler = var.handler
